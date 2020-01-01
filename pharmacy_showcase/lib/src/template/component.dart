@@ -8,9 +8,10 @@ class HtmlComponent extends Component {
   final String tag;
   final String id;
   final List<String> classes;
+  final String href;
   final List<Component> children;
 
-  HtmlComponent({this.tag, this.classes, this.id, this.children});
+  HtmlComponent({this.tag, this.classes, this.id, this.href, this.children});
 
   @override
   String render() {
@@ -20,6 +21,9 @@ class HtmlComponent extends Component {
     }
     if (id?.isNotEmpty == true) {
       sb.write(' id="$id"');
+    }
+    if (href?.isNotEmpty == true) {
+      sb.write(' href="$href"');
     }
     sb.write('>');
     if (children != null) {
@@ -41,9 +45,8 @@ class RenderRawTextComponent extends Component {
 
 class DivComponent extends HtmlComponent {
   DivComponent(
-      {List<String> classes = const [], @required List<Component> children})
-      : assert(children != null),
-        super(tag: 'div', classes: classes, children: children);
+      {List<String> classes = const [], String id, List<Component> children})
+      : super(tag: 'div', id: id, classes: classes, children: children);
 }
 
 class MaterialIconComponent extends HtmlComponent {
@@ -58,9 +61,8 @@ class MaterialIconComponent extends HtmlComponent {
 }
 
 class SectionComponent extends HtmlComponent {
-  SectionComponent({@required List<Component> children})
-      : assert(children != null),
-        super(tag: 'section', children: children);
+  SectionComponent({List<Component> children, List<String> classes})
+      : super(tag: 'section', classes: classes, children: children);
 }
 
 class SpanComponent extends HtmlComponent {
@@ -70,6 +72,23 @@ class SpanComponent extends HtmlComponent {
             tag: 'span',
             classes: classes,
             children: [RenderRawTextComponent(text)]);
+}
+
+class UnorderedComponent extends HtmlComponent {
+  UnorderedComponent(
+      {List<String> classes = const [], List<Component> children})
+      : super(tag: 'ul', classes: classes, children: children);
+}
+
+class ListItemComponent extends HtmlComponent {
+  ListItemComponent({List<String> classes = const [], List<Component> children})
+      : super(tag: 'li', classes: classes, children: children);
+}
+
+class AnchorComponent extends HtmlComponent {
+  AnchorComponent(
+      {List<String> classes = const [], String href, List<Component> children})
+      : super(tag: 'a', href: href, classes: classes, children: children);
 }
 
 class ParagraphComponent extends HtmlComponent {

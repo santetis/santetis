@@ -19,13 +19,19 @@ class PharmacyShowcase {
     //  todo: get data from database
     if (pharmacyId == 'pharmacieduparc31') {
       final pharmacy = Pharmacy(
-        '',
-        'Pharmacie du parc',
-        Address(
-          64,
-          'Avenue tolosane',
-          '31520',
-          'Ramonville-Saint-Agne',
+        domainName: 'pharmaciduparc31',
+        name: 'Pharmacie du parc',
+        phone: '0561733157',
+        email: 'leparc31@gmail.com',
+        address: Address(
+          streetNumber: 63,
+          streetName: 'Avenue tolosane',
+          zipCode: '31520',
+          city: 'Ramonville-Saint-Agne',
+          coordinates: Coordinates(
+            latitude: 43.546812,
+            longitude: 1.4734,
+          ),
         ),
       );
       final home = HtmlComponent(pharmacy: pharmacy);

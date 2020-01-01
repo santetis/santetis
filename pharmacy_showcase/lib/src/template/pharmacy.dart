@@ -13,6 +13,24 @@ class HtmlComponent extends Component {
 <html>
 ${HeadComponent(pharmacy: pharmacy).render()}
 ${BodyComponent(pharmacy: pharmacy).render()}
+<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeUORSJnNLi-dEtxJyy8S7ZwFE0cnFdu0&callback=initMap"></script>
+<script>
+  function initMap() {
+    var pharmacyPosition = {
+      lat: ${pharmacy.address.coordinates.latitude}, 
+      lng: ${pharmacy.address.coordinates.longitude}
+    };
+    var map = new google.maps.Map(document.querySelector('#map'), {
+      center: pharmacyPosition,
+      zoom: 17,
+      gestureHandling: 'cooperative'
+    });
+    var marker = new google.maps.Marker({
+      position: pharmacyPosition,
+      map: map
+    });
+  }
+</script>
 </html>''';
   }
 }
@@ -61,6 +79,7 @@ class BodyComponent extends Component {
     return '''<body>
   ${TopBarComponent(pharmacy: pharmacy).render()}
   ${InformationsComponent().render()}
+  ${DetailsAndMapComponent(pharmacy: pharmacy).render()}
 </body>''';
   }
 }
@@ -73,10 +92,10 @@ class TopBarComponent extends Component {
   @override
   String render() {
     return DivComponent(
-      classes: ['green', 'top-bar'],
+      classes: ['top-bar'],
       children: [
         DivComponent(
-          classes: ['center-top-bar'],
+          classes: ['center-top-bar-content'],
           children: [
             SpanComponent(
               text: pharmacy.name,
@@ -92,11 +111,174 @@ class TopBarComponent extends Component {
 class InformationsComponent extends Component {
   @override
   String render() {
-    return RowComponent(
-      classes: ['informations', 'v-center'],
+    return DivComponent(
+      classes: ['center-informations-content'],
       children: [
-        MaterialIconComponent(iconName: 'info_outline'),
-        SpanComponent(text: 'Informations '),
+        RowComponent(
+          classes: ['informations', 'v-center'],
+          children: [
+            MaterialIconComponent(
+              iconName: 'info_outline',
+              classes: ['informations-icon-size'],
+            ),
+            SpanComponent(
+              text: 'Informations',
+              classes: ['informations-style'],
+            ),
+          ],
+        )
+      ],
+    ).render();
+  }
+}
+
+class DetailsAndMapComponent extends Component {
+  final Pharmacy pharmacy;
+
+  DetailsAndMapComponent({@required this.pharmacy});
+
+  @override
+  String render() {
+    return DivComponent(
+      classes: ['center-details-and-map'],
+      children: [
+        ColumnComponent(
+          children: [
+            MapComponent(),
+            DetailsComponent(pharmacy: pharmacy),
+          ],
+        ),
+      ],
+    ).render();
+  }
+}
+
+class MapComponent extends Component {
+  @override
+  String render() {
+    return DivComponent(id: 'map').render();
+  }
+}
+
+class DetailsComponent extends Component {
+  final Pharmacy pharmacy;
+
+  DetailsComponent({@required this.pharmacy});
+
+  @override
+  String render() {
+    return RowComponent(
+      classes: ['test'],
+      children: [
+        SectionComponent(
+          children: [
+            ColumnComponent(
+              children: [
+                SpanComponent(
+                  text: 'Nous contacter',
+                  classes: ['section-title'],
+                ),
+                UnorderedComponent(
+                  classes: ['no-ul-decoration'],
+                  children: [
+                    ListItemComponent(
+                      classes: ['padding-ul-items'],
+                      children: [
+                        AnchorComponent(
+                          classes: ['black', 'no-text-decoration'],
+                          href: 'tel:${pharmacy.phone}',
+                          children: [
+                            RowComponent(
+                              classes: ['v-center'],
+                              children: [
+                                MaterialIconComponent(
+                                  iconName: 'phone',
+                                  classes: ['icon-padding-right'],
+                                ),
+                                SpanComponent(
+                                    classes: ['list-item-text'],
+                                    text: pharmacy.phone)
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    ListItemComponent(
+                      classes: ['padding-ul-items'],
+                      children: [
+                        AnchorComponent(
+                          classes: ['black', 'no-text-decoration'],
+                          href: 'mailto:${pharmacy.email}',
+                          children: [
+                            RowComponent(
+                              classes: ['v-center'],
+                              children: [
+                                MaterialIconComponent(
+                                  iconName: 'mail',
+                                  classes: ['icon-padding-right'],
+                                ),
+                                SpanComponent(
+                                    classes: ['list-item-text'],
+                                    text: pharmacy.email)
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    ListItemComponent(
+                      classes: ['padding-ul-items'],
+                      children: [
+                        AnchorComponent(
+                          classes: ['black', 'no-text-decoration'],
+                          href:
+                              'https://maps.google.com/?q=${pharmacy.address.toString()}',
+                          children: [
+                            RowComponent(
+                              classes: ['v-center'],
+                              children: [
+                                MaterialIconComponent(
+                                  iconName: 'room',
+                                  classes: ['icon-padding-right'],
+                                ),
+                                ColumnComponent(
+                                  classes: ['list-item-text'],
+                                  children: [
+                                    SpanComponent(
+                                      text:
+                                          '${pharmacy.address.streetNumber} ${pharmacy.address.streetName}',
+                                    ),
+                                    SpanComponent(
+                                      text:
+                                          '${pharmacy.address.zipCode} ${pharmacy.address.city}',
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+        SectionComponent(
+          children: [
+            ColumnComponent(
+              children: [
+                SpanComponent(
+                  text: 'Informations Pratiques',
+                  classes: ['section-title'],
+                ),
+              ],
+            ),
+          ],
+        ),
       ],
     ).render();
   }

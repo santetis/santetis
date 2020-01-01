@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 body, html {
     padding: 0;
@@ -15,6 +15,19 @@ body:nth-child(2) {
     background-color: #1FA463;
 }
 
+.black {
+    color: black;
+}
+
+.no-text-decoration {
+    text-decoration: none;
+}
+
+.no-ul-decoration {
+    padding: 0;
+    list-style-type: none;
+}
+
 .grey {
     color: #F1F3F4;
 }
@@ -22,11 +35,13 @@ body:nth-child(2) {
 .row {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .column {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
 }
 
 .row.v-center, .column.v-center {
