@@ -3,9 +3,7 @@ name: Deploy pharmacy showcase
 on:
   push:
     paths:
-      - pharmacy_showcase/bin/**
-      - pharmacy_showcase/lib/**
-      - pharmacy_showcase/static/**
+      - pharmacy_showcase/**
     branches:
       - master
 
