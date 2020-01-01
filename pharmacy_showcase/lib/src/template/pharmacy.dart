@@ -96,7 +96,7 @@ class InformationsComponent extends Component {
       classes: ['informations', 'v-center'],
       children: [
         MaterialIconComponent(iconName: 'info_outline'),
-        SpanComponent(text: 'Informations'),
+        SpanComponent(text: 'Informations '),
       ],
     ).render();
   }

@@ -1,4 +1,4 @@
-name: Ci on master
+name: Deploy pharmacy showcase
 
 on:
   push:
