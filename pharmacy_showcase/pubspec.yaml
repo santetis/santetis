@@ -1,0 +1,19 @@
+name: pharmacy_showcase
+description: A sample command-line application.
+# version: 1.0.0
+# homepage: https://www.example.com
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  pedantic: ^1.9.0
+  shelf: ^0.7.5
+  shelf_router: ^0.7.1
+  shelf_static: ^0.2.8
+  meta: ^1.1.8
+
+dev_dependencies:
+  test: ^1.6.0
+  build_runner: ^1.3.1
+  shelf_router_generator: ^0.7.2+2

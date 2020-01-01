@@ -1,0 +1,29 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.top-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 72px;
+    background: #1FA463 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    width: 100%;
+}
+
+.center-top-bar {
+    width: 100%;
+    max-width: 1100px;
+    min-width: 800px;
+    margin: auto;
+}
+
+.pharmacy-name {
+    font-size: 36px;
+}
+
