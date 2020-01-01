@@ -5,12 +5,17 @@ ADD pubspec.* /app/
 RUN pub get
 ADD bin /app/bin/
 ADD lib /app/lib/
+ADD static /app/static/
 RUN dart2native /app/bin/main.dart -o /app/bin/server
 
 ## Build a bare minimum image for serving.
 FROM scratch
+WORKDIR /app
+
 # Server and server dependencies.
 COPY --from=dart-runtime /app/bin/server /app/bin/server
+COPY --from=dart-runtime /app/static /app/static
+
 COPY --from=dart-runtime /lib64/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2
 COPY --from=dart-runtime /lib/x86_64-linux-gnu/libc.so.6 /lib/x86_64-linux-gnu/libc.so.6
 COPY --from=dart-runtime /lib/x86_64-linux-gnu/libm.so.6 /lib/x86_64-linux-gnu/libm.so.6
