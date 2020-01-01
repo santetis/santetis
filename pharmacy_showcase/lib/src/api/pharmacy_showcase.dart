@@ -9,6 +9,11 @@ import 'package:shelf_router/shelf_router.dart';
 part 'pharmacy_showcase.g.dart';
 
 class PharmacyShowcase {
+  @Route.get('/ping')
+  Response ping(Request request) {
+    return Response.ok('pong');
+  }
+
   @Route.get('/pharmacy/<pharmacyId>')
   Future<Response> pharmacy(Request request, String pharmacyId) async {
     //  todo: get data from database
