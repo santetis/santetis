@@ -68,8 +68,8 @@ class Head extends Component {
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/pharmacy.css">
-  <link rel="stylesheet" media="(min-width: 500px)" href="/css/pharmacy-desktop.css">
-  <link rel="stylesheet" media="(max-width: 500px)" href="/css/pharmacy-mobile.css">
+  <link rel="stylesheet" media="(min-width: 740px)" href="/css/pharmacy-desktop.css">
+  <link rel="stylesheet" media="(max-width: 739px)" href="/css/pharmacy-mobile.css">
 </head>''';
   }
 }
@@ -140,6 +140,21 @@ class Content extends Component {
           privateCarPark: pharmacy.privateCarPark,
           wc: pharmacy.wc,
         ),
+        SantetisCopyright(),
+      ],
+    );
+  }
+}
+
+class SantetisCopyright extends Component {
+  @override
+  Component build() {
+    return DivComponent(
+      classes: ['santetis-copryright-container'],
+      children: [
+        SpanComponent(
+          text: 'Site généré par Santetis. Tout droit réservé',
+        )
       ],
     );
   }
