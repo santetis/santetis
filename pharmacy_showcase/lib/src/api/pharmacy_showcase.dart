@@ -13,7 +13,7 @@ OpenType getOpenType(Pharmacy pharmacy) {
     DateTime.utc(2020, 01, 01),
     DateTime.utc(2020, 01, 06),
   ];
-  final now = DateTime.now().add(Duration(hours: 1));
+  final now = DateTime.now().toUtc().add(Duration(hours: 1));
   final today = DateTime(now.year, now.month, now.day);
 
   final weekday = now.weekday;
@@ -117,7 +117,6 @@ class PharmacyShowcase {
       );
 
       final openType = getOpenType(pharmacy);
-      print(openType);
 
       final home = Html(pharmacy: pharmacy, openType: openType);
       return Response.ok(

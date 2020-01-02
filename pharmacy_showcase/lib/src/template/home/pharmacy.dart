@@ -199,7 +199,7 @@ class State extends Component {
 
   String readableNext() {
     final sb = StringBuffer();
-    final now = DateTime.now();
+    final now = DateTime.now().toUtc();
     if (openType == OpenType.open || openType == OpenType.duty) {
       final day = pharmacy.weekDays[now.weekday];
 
@@ -208,7 +208,7 @@ class State extends Component {
         Hour(now.hour, now.minute),
       );
       if (currentTimeSlot == null) {
-        // should never happen
+        return '';
       }
       sb.write('Fermeture à ${currentTimeSlot.end.toString()}');
     }
