@@ -51,7 +51,7 @@ class PharmacyShowcase {
 
   @Route.get('/time')
   Response time(Request request) {
-    return Response.ok('${DateTime.now()}');
+    return Response.ok('${DateTime.now()} utc ${DateTime.now().toUtc()}');
   }
 
   @Route.get('/pharmacy/<pharmacyId>')
