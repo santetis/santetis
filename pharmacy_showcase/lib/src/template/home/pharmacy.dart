@@ -388,7 +388,7 @@ class ContactUsCard extends Component {
               iconName: 'phone',
               children: [
                 SpanComponent(
-                  classes: ['list-item-text'],
+                  classes: ['anchor-list-item-text', 'list-item-text'],
                   text: phone,
                 ),
               ],
@@ -403,7 +403,7 @@ class ContactUsCard extends Component {
               iconName: 'mail',
               children: [
                 SpanComponent(
-                  classes: ['list-item-text'],
+                  classes: ['anchor-list-item-text', 'list-item-text'],
                   text: email,
                 ),
               ],
@@ -418,7 +418,7 @@ class ContactUsCard extends Component {
               iconName: 'room',
               children: [
                 ColumnComponent(
-                  classes: ['list-item-text'],
+                  classes: ['anchor-list-item-text', 'list-item-text'],
                   children: [
                     SpanComponent(
                       text: '${address.streetNumber} ${address.streetName}',
@@ -469,7 +469,7 @@ class CardDetailListItem extends Component {
       children: [
         MaterialIconComponent(
           iconName: iconName,
-          classes: ['icon-padding-right'],
+          classes: ['icon-list-item'],
         ),
         ...children
       ],

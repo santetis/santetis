@@ -75,15 +75,24 @@ section:nth-child(1) {
     font-size: 36px;
 }
 
-.icon-padding-right {
+.icon-list-item {
+    font-size: 18px;
+    color: #0000008A;
     padding-right: 20px;
+
 }
 
 .padding-ul-items:not(:first-child) {
     padding-top: 9px;
 }
 
-.list-item-text:hover {
+.list-item-text {
+    font-weight: 100;
+    font-size: 18px;
+    color: #0000008A;
+}
+
+.anchor-list-item-text:hover {
     text-decoration: underline;
 }
 
