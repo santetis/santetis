@@ -6,15 +6,14 @@
     font-size: 30px;
 }
 
-
-.state-container {
+.state-container-desktop {
     display: none;
 }
 
 .content {
     display: grid;
     grid-template-columns: 3% auto auto 3%;
-    grid-template-rows: 115px 300px 20px auto 20px auto 20px auto;
+    grid-template-rows: 115px auto 20px 300px 20px  auto 20px auto 20px auto;
 }
 
 .informations-content {
@@ -32,11 +31,28 @@
     width: min-content;
 }
 
-#map {
+.mobile-state-container {
+    border-radius: 29px;
+    /* border-top-left-radius: 9px;
+    border-top-right-radius: 9px; */
     grid-column-start: 2;
     grid-column-end: -2;
     grid-row-start: 2;
     grid-row-end: 3;
+    border: 1px solid #00000061;
+    background-color: white;
+}
+
+.state-container-mobile {
+    margin: auto;
+    width: min-content;
+}
+
+#map {
+    grid-column-start: 2;
+    grid-column-end: -2;
+    grid-row-start: 4;
+    grid-row-end: 5;
 }
 
 .section-title {
@@ -54,23 +70,23 @@
 .contact-us {
     grid-column-start: 2;
     grid-column-end: span 2;
-    grid-row-start: 4;
-    grid-row-end: 5;
+    grid-row-start: 6;
+    grid-row-end: 7;
     align-self: start;
 }
 
 .practical-informations {
     grid-column-start: 2;
     grid-column-end: -2;
-    grid-row-start: 6;
-    grid-row-end: 7;
+    grid-row-start: 8;
+    grid-row-end: 9;
 }
 
 .santetis-copryright-container {
     text-align: center;
     grid-column-start: 2;
     grid-column-end: -2;
-    grid-row-start: 8;
-    grid-row-end: 8;
+    grid-row-start: 10;
+    grid-row-end: 11;
     font-size: 12px;
 }

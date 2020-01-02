@@ -84,7 +84,7 @@ class Body extends Component {
   String render() {
     return '''<body>
   ${TopBar(pharmacy: pharmacy, openType: openType).render()}
-  ${Content(pharmacy: pharmacy).render()}
+  ${Content(pharmacy: pharmacy, openType: openType).render()}
 </body>''';
   }
 }
@@ -117,8 +117,9 @@ class TopBar extends Component {
 
 class Content extends Component {
   final Pharmacy pharmacy;
+  final OpenType openType;
 
-  Content({@required this.pharmacy});
+  Content({@required this.pharmacy, this.openType = OpenType.close});
 
   @override
   Component build() {
@@ -126,6 +127,7 @@ class Content extends Component {
       classes: ['content'],
       children: [
         Informations(),
+        MobileState(pharmacy: pharmacy, openType: openType),
         Map(),
         ContactUsCard(
           phone: pharmacy.phone,
@@ -141,6 +143,23 @@ class Content extends Component {
           wc: pharmacy.wc,
         ),
         SantetisCopyright(),
+      ],
+    );
+  }
+}
+
+class MobileState extends Component {
+  final Pharmacy pharmacy;
+  final OpenType openType;
+
+  MobileState({@required this.pharmacy, this.openType = OpenType.close});
+
+  @override
+  Component build() {
+    return DivComponent(
+      classes: ['mobile-state-container'],
+      children: [
+        State(pharmacy: pharmacy, isDesktop: false, openType: openType),
       ],
     );
   }
@@ -163,15 +182,23 @@ class SantetisCopyright extends Component {
 class State extends Component {
   final Pharmacy pharmacy;
   final OpenType openType;
+  final bool isDesktop;
 
-  State({@required this.pharmacy, this.openType = OpenType.close});
+  State({
+    @required this.pharmacy,
+    this.openType = OpenType.close,
+    this.isDesktop = true,
+  });
 
   @override
   Component build() {
     final text = readableNext();
 
     return RowComponent(
-      classes: ['state-container', 'v-center'],
+      classes: [
+        'state-container-${isDesktop ? 'desktop' : 'mobile'}',
+        'v-center',
+      ],
       children: [
         DivComponent(
           classes: [

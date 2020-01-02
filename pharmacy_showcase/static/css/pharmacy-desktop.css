@@ -2,6 +2,10 @@ body {
     min-width: 740px;
 }
 
+.state-container-mobile {
+    display: none;
+}
+
 .center-top-bar-content {
     width: 90%;
     max-width: 1100px;
@@ -11,6 +15,10 @@ body {
 
 .pharmacy-name {
     font-size: 36px;
+}
+
+.state-container-desktop {
+    background-color: #F1F3F4;
 }
 
 .content {
@@ -30,6 +38,10 @@ body {
     grid-row-end: 2;
     align-self: end;
     padding-bottom: 24px;
+}
+
+.state-container-desktop {
+    border-radius: 29px;
 }
 
 #map {

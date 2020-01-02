@@ -51,10 +51,8 @@ section:nth-child(1) {
     text-decoration: underline;
 }
 
-.state-container {
-    background-color: #F1F3F4;
+.state-container-mobile, .state-container-desktop {
     padding: 11px;
-    border-radius: 29px;
 }
 
 .pharmacy-state {
