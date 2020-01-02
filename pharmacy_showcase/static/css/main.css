@@ -11,8 +11,12 @@ body:nth-child(2) {
     margin-top: 80px;
 }
 
-.green {
+.green-background {
     background-color: #1FA463;
+}
+
+.red-background {
+    background-color: #DD483B;
 }
 
 .black {
@@ -41,6 +45,9 @@ body:nth-child(2) {
 .column {
     display: flex;
     flex-direction: column;
+}
+
+.flex-wrap {
     flex-wrap: wrap;
 }
 
@@ -50,4 +57,8 @@ body:nth-child(2) {
 
 .row.h-center, .column.h-center {
     align-self: center;
+}
+
+.flexible-1 {
+    flex: 1;
 }

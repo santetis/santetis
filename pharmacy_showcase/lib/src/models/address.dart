@@ -19,4 +19,7 @@ class Address {
     this.city,
     this.coordinates,
   });
+
+  @override
+  String toString() => '$streetNumber $streetName $zipCode $city';
 }
