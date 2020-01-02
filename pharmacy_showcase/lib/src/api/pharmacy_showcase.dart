@@ -49,6 +49,11 @@ class PharmacyShowcase {
     return Response.ok('pong');
   }
 
+  @Route.get('/time')
+  Response time(Request request) {
+    return Response.ok('${DateTime.now()}');
+  }
+
   @Route.get('/pharmacy/<pharmacyId>')
   Future<Response> pharmacy(Request request, String pharmacyId) async {
     //  todo: get data from database
