@@ -223,7 +223,7 @@ class Informations extends Component {
       classes: ['informations-content'],
       children: [
         RowComponent(
-          classes: ['informations', 'v-center'],
+          classes: ['v-center', 'h-center', 'informations'],
           children: [
             MaterialIconComponent(
               iconName: 'info_outline',
@@ -234,7 +234,7 @@ class Informations extends Component {
               classes: ['informations-style'],
             ),
           ],
-        )
+        ),
       ],
     );
   }

@@ -9,6 +9,10 @@ body {
     margin: auto;
 }
 
+.pharmacy-name {
+    font-size: 36px;
+}
+
 .content {
     width: 88%;
     max-width: 1000px;
@@ -33,6 +37,18 @@ body {
     grid-column-end: -1;
     grid-row-start: 2;
     grid-row-end: 3;
+}
+
+.section-title {
+    font-size: 36px;
+}
+
+.icon-list-item {
+    font-size: 18px;
+}
+
+.list-item-text {
+    font-size: 18px;
 }
 
 .contact-us {

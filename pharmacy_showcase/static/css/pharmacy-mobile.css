@@ -2,14 +2,19 @@
     padding-left: 10px;
 }
 
+.pharmacy-name {
+    font-size: 30px;
+}
+
+
 .state-container {
-    display:none;
+    display: none;
 }
 
 .content {
     display: grid;
     grid-template-columns: 3% auto auto 3%;
-    grid-template-rows: 115px 500px 20px auto 20px auto 20px auto;
+    grid-template-rows: 115px 300px 20px auto 20px auto 20px auto;
 }
 
 .informations-content {
@@ -18,7 +23,13 @@
     grid-row-start: 1;
     grid-row-end: 2;
     align-self: end;
+    justify-content: center;
     padding-bottom: 24px;
+}
+
+.informations {
+    margin: auto;
+    width: min-content;
 }
 
 #map {
@@ -26,6 +37,18 @@
     grid-column-end: -2;
     grid-row-start: 2;
     grid-row-end: 3;
+}
+
+.section-title {
+    font-size: 24px;
+}
+
+.icon-list-item {
+    font-size: 14px;
+}
+
+.list-item-text {
+    font-size: 14px;
 }
 
 .contact-us {
@@ -49,4 +72,5 @@
     grid-column-end: -2;
     grid-row-start: 8;
     grid-row-end: 8;
+    font-size: 12px;
 }
