@@ -5,7 +5,10 @@ body, html {
     margin: 0;
     box-sizing: border-box;
     font-family: Roboto;
+    /* display: grid; */
+    width: 100%;
 }
+
 
 body:nth-child(2) {
     margin-top: 80px;
@@ -39,7 +42,6 @@ body:nth-child(2) {
 .row {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
 }
 
 .column {

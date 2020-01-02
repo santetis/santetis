@@ -68,6 +68,8 @@ class Head extends Component {
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/pharmacy.css">
+  <link rel="stylesheet" media="(min-width: 500px)" href="/css/pharmacy-desktop.css">
+  <link rel="stylesheet" media="(max-width: 500px)" href="/css/pharmacy-mobile.css">
 </head>''';
   }
 }
@@ -82,8 +84,7 @@ class Body extends Component {
   String render() {
     return '''<body>
   ${TopBar(pharmacy: pharmacy, openType: openType).render()}
-  ${Informations().render()}
-  ${DetailsAndMap(pharmacy: pharmacy).render()}
+  ${Content(pharmacy: pharmacy).render()}
 </body>''';
   }
 }
@@ -108,6 +109,36 @@ class TopBar extends Component {
             ),
             State(pharmacy: pharmacy, openType: openType),
           ],
+        ),
+      ],
+    );
+  }
+}
+
+class Content extends Component {
+  final Pharmacy pharmacy;
+
+  Content({@required this.pharmacy});
+
+  @override
+  Component build() {
+    return DivComponent(
+      classes: ['content'],
+      children: [
+        Informations(),
+        Map(),
+        ContactUsCard(
+          phone: pharmacy.phone,
+          email: pharmacy.email,
+          address: pharmacy.address,
+        ),
+        PracticalInformationsCard(
+          acceptAnimals: pharmacy.acceptAnimals,
+          childToy: pharmacy.childToy,
+          handicapAccess: pharmacy.handicapAccess,
+          possibilityToSit: pharmacy.possibilityToSit,
+          privateCarPark: pharmacy.privateCarPark,
+          wc: pharmacy.wc,
         ),
       ],
     );
@@ -174,7 +205,7 @@ class Informations extends Component {
   @override
   Component build() {
     return DivComponent(
-      classes: ['center-informations-content'],
+      classes: ['informations-content'],
       children: [
         RowComponent(
           classes: ['informations', 'v-center'],
@@ -194,59 +225,10 @@ class Informations extends Component {
   }
 }
 
-class DetailsAndMap extends Component {
-  final Pharmacy pharmacy;
-
-  DetailsAndMap({@required this.pharmacy});
-
-  @override
-  Component build() {
-    return DivComponent(
-      classes: ['center-details-and-map'],
-      children: [
-        ColumnComponent(
-          children: [
-            Map(),
-            Details(pharmacy: pharmacy),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
 class Map extends Component {
   @override
   Component build() {
     return DivComponent(id: 'map');
-  }
-}
-
-class Details extends Component {
-  final Pharmacy pharmacy;
-
-  Details({@required this.pharmacy});
-
-  @override
-  Component build() {
-    return RowComponent(
-      classes: ['details-margin'],
-      children: [
-        ContactUsCard(
-          phone: pharmacy.phone,
-          email: pharmacy.email,
-          address: pharmacy.address,
-        ),
-        PracticalInformationsCard(
-          acceptAnimals: pharmacy.acceptAnimals,
-          childToy: pharmacy.childToy,
-          handicapAccess: pharmacy.handicapAccess,
-          possibilityToSit: pharmacy.possibilityToSit,
-          privateCarPark: pharmacy.privateCarPark,
-          wc: pharmacy.wc,
-        ),
-      ],
-    );
   }
 }
 
@@ -270,6 +252,7 @@ class PracticalInformationsCard extends Component {
   @override
   Component build() {
     return CardDetail(
+      classes: ['practical-informations'],
       label: 'Informations Pratiques',
       children: [
         if (privateCarPark)
@@ -378,6 +361,7 @@ class ContactUsCard extends Component {
   @override
   Component build() {
     return CardDetail(
+      classes: ['contact-us'],
       label: 'Nous Contacter',
       children: [
         ListItemComponent(
@@ -479,13 +463,15 @@ class CardDetailListItem extends Component {
 
 class CardDetail extends Component {
   final String label;
+  final List<String> classes;
   final List<Component> children;
 
-  CardDetail({this.label, this.children});
+  CardDetail({this.label, this.children, this.classes});
 
   @override
   Component build() {
     return SectionComponent(
+      classes: classes,
       children: [
         ColumnComponent(
           children: [
