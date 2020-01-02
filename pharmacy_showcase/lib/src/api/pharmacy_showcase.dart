@@ -13,8 +13,8 @@ OpenType getOpenType(Pharmacy pharmacy) {
     DateTime.utc(2020, 01, 01),
     DateTime.utc(2020, 01, 06),
   ];
-  final now = DateTime.now().toUtc();
-  final today = DateTime.utc(now.year, now.month, now.day);
+  final now = DateTime.now();
+  final today = DateTime(now.year, now.month, now.day);
 
   final weekday = now.weekday;
   final date = publicHolidays.firstWhere(
