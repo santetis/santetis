@@ -46,6 +46,7 @@
 .state-container-mobile {
     margin: auto;
     width: min-content;
+    white-space: nowrap;
 }
 
 #map {

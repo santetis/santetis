@@ -192,7 +192,14 @@ class State extends Component {
 
   @override
   Component build() {
-    final text = readableNext();
+    final closeAt = readableNext();
+    var text = 'FERMÉ';
+    if (openType == OpenType.open || openType == OpenType.duty) {
+      text = 'OUVERT';
+      if (closeAt.isNotEmpty) {
+        text += ' - $closeAt';
+      }
+    }
 
     return RowComponent(
       classes: [
@@ -211,7 +218,7 @@ class State extends Component {
         ),
         SpanComponent(
           text: openType == OpenType.open || openType == OpenType.duty
-              ? 'OUVERT - $text'
+              ? text
               : 'FERMÉ',
           classes: ['state-text'],
         ),
@@ -219,14 +226,14 @@ class State extends Component {
     );
   }
 
-  TimeSlot getCurrentTimeSlot(List<TimeSlot> timeSlots, Hour hour) {
-    return timeSlots
-        .firstWhere((timeSlot) => timeSlot.isInSlot(hour.hour, hour.minute));
-  }
+  TimeSlot getCurrentTimeSlot(List<TimeSlot> timeSlots, Hour hour) =>
+      timeSlots.firstWhere(
+          (timeSlot) => timeSlot.isInSlot(hour.hour, hour.minute),
+          orElse: () => null);
 
   String readableNext() {
     final sb = StringBuffer();
-    final now = DateTime.now().toUtc();
+    final now = DateTime.now().toUtc().add(Duration(hours: 1));
     if (openType == OpenType.open || openType == OpenType.duty) {
       final day = pharmacy.weekDays[now.weekday];
 

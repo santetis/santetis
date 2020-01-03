@@ -98,6 +98,15 @@ class TimeSlot {
     }
     return false;
   }
+
+  @override
+  String toString() {
+    final sb = StringBuffer('TimeSlot{')
+      ..write(' ${start.toString()}')
+      ..write(' ${end.toString()}')
+      ..write(' }');
+    return sb.toString();
+  }
 }
 
 class Hour {
