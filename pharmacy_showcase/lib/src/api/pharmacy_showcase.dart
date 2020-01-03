@@ -16,7 +16,7 @@ OpenType getOpenType(Pharmacy pharmacy) {
   final now = DateTime.now().toUtc().add(Duration(hours: 1));
   final today = DateTime(now.year, now.month, now.day);
 
-  final weekday = now.weekday;
+  final weekday = now.weekday - 1;
   final date = publicHolidays.firstWhere(
     (publicHoliday) => publicHoliday.isAtSameMomentAs(today),
     orElse: () => null,

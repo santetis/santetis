@@ -235,7 +235,7 @@ class State extends Component {
     final sb = StringBuffer();
     final now = DateTime.now().toUtc().add(Duration(hours: 1));
     if (openType == OpenType.open || openType == OpenType.duty) {
-      final day = pharmacy.weekDays[now.weekday];
+      final day = pharmacy.weekDays[now.weekday - 1];
 
       final currentTimeSlot = getCurrentTimeSlot(
         openType == OpenType.open ? day.slots : pharmacy.dutyTimeSlot,
