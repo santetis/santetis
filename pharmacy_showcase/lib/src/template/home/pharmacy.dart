@@ -195,7 +195,7 @@ class State extends Component {
     final closeAt = readableNext();
     var text = 'FERMÉ';
     if (openType == OpenType.open || openType == OpenType.duty) {
-      text = 'OUVERT';
+      text = openType == OpenType.open ? 'OUVERT' : 'DE GARDE';
       if (closeAt.isNotEmpty) {
         text += ' - $closeAt';
       }
