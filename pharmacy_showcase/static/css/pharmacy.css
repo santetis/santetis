@@ -28,7 +28,7 @@ section:nth-child(1) {
 }
 
 .list-item-text {
-    font-weight: lighter;
+    font-weight: normal;
     color: #0000008A;
 }
 

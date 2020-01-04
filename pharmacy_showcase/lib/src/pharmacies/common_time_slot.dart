@@ -7,5 +7,5 @@ final closeDuringLaunchTimeSlots = [
 ];
 final dutyCloseDurintLaunchTimeSlots = [
   TimeSlot(Hour(9, 0), Hour(12, 30)),
-  TimeSlot(Hour(14, 0), Hour(19, 30)),
+  TimeSlot(Hour(15, 0), Hour(19, 30)),
 ];
