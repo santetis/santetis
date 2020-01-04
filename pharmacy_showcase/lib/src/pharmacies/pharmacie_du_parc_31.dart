@@ -36,13 +36,13 @@ final pharmacieDuParc31 = Pharmacy(
     ),
     WeekDay(
       'Samedi',
-      dutyCloseDurintLaunchTimeSlots,
+      closeDuringLaunchTimeSlots,
     ),
   ],
   dutyDates: [
     DateTime.utc(2020, 01, 05),
   ],
-  dutyTimeSlot: allDayTimeSlot,
+  dutyTimeSlot: dutyCloseDurintLaunchTimeSlots,
   address: Address(
     streetNumber: 63,
     streetName: 'Avenue tolosane',

@@ -81,20 +81,6 @@ class Content extends Component {
 
   @override
   Component build() {
-    final schedule = [
-      Schedule(pharmacy: pharmacy, openType: openType),
-      DivComponent(
-        classes: ['duty-title'],
-        children: [
-          Title(
-            iconName: 'emoji_transportation',
-            text: 'Jour de garde',
-          ),
-        ],
-      ),
-      DutySchedule(pharmacy: pharmacy, openType: openType),
-    ];
-
     return DivComponent(
       classes: ['content'],
       children: [
@@ -105,7 +91,17 @@ class Content extends Component {
             MobileState(pharmacy: pharmacy, openType: openType),
           ],
         ),
-        ...schedule
+        Schedule(pharmacy: pharmacy, openType: openType),
+        DivComponent(
+          classes: ['duty-title'],
+          children: [
+            Title(
+              iconName: 'emoji_transportation',
+              text: 'Jour de garde',
+            ),
+          ],
+        ),
+        DutySchedule(pharmacy: pharmacy, openType: openType),
       ],
     );
   }
