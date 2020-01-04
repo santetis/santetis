@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - pharmacy_showcase/**
-      - .github/workflows/deploy_showcase.yaml
+      - .github/workflows/deploy_showcase_staging.yaml
     branches:
       - master
 
