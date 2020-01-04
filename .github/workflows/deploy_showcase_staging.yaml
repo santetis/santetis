@@ -1,4 +1,4 @@
-name: Deploy pharmacy showcase
+name: Deploy staging pharmacy showcase
 
 on:
   push:
