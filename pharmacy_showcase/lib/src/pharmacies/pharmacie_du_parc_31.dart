@@ -36,7 +36,7 @@ final pharmacieDuParc31 = Pharmacy(
     ),
     WeekDay(
       'Samedi',
-      closeDuringLaunchTimeSlots,
+      dutyCloseDurintLaunchTimeSlots,
     ),
   ],
   dutyDates: [
