@@ -293,7 +293,7 @@ class PracticalInformationsCard extends Component {
                 children: [
                   SpanComponent(
                     classes: ['list-item-text'],
-                    text: 'Animaux accepté',
+                    text: 'Animaux acceptés',
                   ),
                 ],
               ),
