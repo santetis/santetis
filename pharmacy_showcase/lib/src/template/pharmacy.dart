@@ -233,7 +233,7 @@ class PracticalInformationsCard extends Component {
                 children: [
                   SpanComponent(
                     classes: ['list-item-text'],
-                    text: 'Accès handicappé',
+                    text: 'Accès handicapé',
                   ),
                 ],
               ),
@@ -263,7 +263,7 @@ class PracticalInformationsCard extends Component {
                 children: [
                   SpanComponent(
                     classes: ['list-item-text'],
-                    text: 'Place assise',
+                    text: 'Places assises',
                   ),
                 ],
               ),
