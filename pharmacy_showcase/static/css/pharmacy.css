@@ -1,18 +1,3 @@
- .top-bar {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    align-self: center;
-    position: fixed;
-    z-index: 3;
-    top: 0;
-    left: 0;
-    height: 72px;
-    background: #1FA463 0% 0% no-repeat padding-box;
-    box-shadow: 0px 3px 6px #00000029;
-    width: 100%;
-}
-
 #map {
     border: 1px solid #00000061;
     border-radius: 9px;
@@ -30,7 +15,7 @@ section:nth-child(1) {
 }
 
 .section-title {
-    font-weight: 100;
+    font-weight: lighter;
 }
 
 .icon-list-item {
@@ -43,7 +28,7 @@ section:nth-child(1) {
 }
 
 .list-item-text {
-    font-weight: 100;
+    font-weight: lighter;
     color: #0000008A;
 }
 
@@ -70,12 +55,22 @@ section:nth-child(1) {
     margin-bottom: 0;
 }
 
-.informations-icon-size {
+.page-title-icon-size {
     font-size: 36px;
     padding-right: 20px;
 }
 
-.informations-style {
-    font-weight: 100;
+.page-title-style {
+    font-weight: lighter;
     font-size: 36px;
+}
+
+.horaires-icon-size {
+    color: #F1F3F4;
+}
+
+.horaires-style {
+    font-size: 18px;
+    color: #F1F3F4;
+    margin-left: 20px;
 }

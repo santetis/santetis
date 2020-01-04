@@ -1,14 +1,16 @@
 import 'package:meta/meta.dart';
+import 'package:pharmacy_showcase/src/components/body_component.dart';
 import 'package:pharmacy_showcase/src/components/component.dart';
 import 'package:pharmacy_showcase/src/components/components.dart';
 import 'package:pharmacy_showcase/src/models/address.dart';
 import 'package:pharmacy_showcase/src/models/pharmacy.dart';
+import 'package:pharmacy_showcase/src/template/common.dart';
 
-class Html extends Component {
+class PharmacyHtml extends Component {
   final Pharmacy pharmacy;
   final OpenType openType;
 
-  Html({@required this.pharmacy, this.openType = OpenType.close});
+  PharmacyHtml({@required this.pharmacy, this.openType = OpenType.close});
 
   @override
   String render() {
@@ -81,35 +83,11 @@ class Body extends Component {
   Body({@required this.pharmacy, this.openType = OpenType.close});
 
   @override
-  String render() {
-    return '''<body>
-  ${TopBar(pharmacy: pharmacy, openType: openType).render()}
-  ${Content(pharmacy: pharmacy, openType: openType).render()}
-</body>''';
-  }
-}
-
-class TopBar extends Component {
-  final Pharmacy pharmacy;
-  final OpenType openType;
-
-  TopBar({@required this.pharmacy, this.openType});
-
-  @override
   Component build() {
-    return DivComponent(
-      classes: ['top-bar'],
+    return BodyComponent(
       children: [
-        RowComponent(
-          classes: ['center-top-bar-content'],
-          children: [
-            SpanComponent(
-              text: pharmacy.name,
-              classes: ['grey', 'pharmacy-name', 'flexible-1'],
-            ),
-            State(pharmacy: pharmacy, openType: openType),
-          ],
-        ),
+        TopBar(pharmacy: pharmacy, openType: openType),
+        Content(pharmacy: pharmacy, openType: openType),
       ],
     );
   }
@@ -126,8 +104,28 @@ class Content extends Component {
     return DivComponent(
       classes: ['content'],
       children: [
-        Informations(),
-        MobileState(pharmacy: pharmacy, openType: openType),
+        RowComponent(
+          classes: ['page-title-content'],
+          children: [
+            DivComponent(
+              classes: ['flexible-1'],
+              children: [
+                Title(
+                  iconName: 'info_outline',
+                  text: 'Informations',
+                ),
+              ],
+            ),
+            GoToSchedule(),
+          ],
+        ),
+        ColumnComponent(
+          classes: ['mobile-state-container'],
+          children: [
+            MobileState(pharmacy: pharmacy, openType: openType),
+            GoToSchedule(isMobile: true),
+          ],
+        ),
         Map(),
         ContactUsCard(
           phone: pharmacy.phone,
@@ -148,124 +146,31 @@ class Content extends Component {
   }
 }
 
-class MobileState extends Component {
-  final Pharmacy pharmacy;
-  final OpenType openType;
+class GoToSchedule extends Component {
+  final bool isMobile;
 
-  MobileState({@required this.pharmacy, this.openType = OpenType.close});
-
-  @override
-  Component build() {
-    return DivComponent(
-      classes: ['mobile-state-container'],
-      children: [
-        State(pharmacy: pharmacy, isDesktop: false, openType: openType),
-      ],
-    );
-  }
-}
-
-class SantetisCopyright extends Component {
-  @override
-  Component build() {
-    return DivComponent(
-      classes: ['santetis-copryright-container'],
-      children: [
-        SpanComponent(
-          text: 'Site généré par Santetis. Tout droit réservé',
-        )
-      ],
-    );
-  }
-}
-
-class State extends Component {
-  final Pharmacy pharmacy;
-  final OpenType openType;
-  final bool isDesktop;
-
-  State({
-    @required this.pharmacy,
-    this.openType = OpenType.close,
-    this.isDesktop = true,
-  });
+  GoToSchedule({this.isMobile = false});
 
   @override
   Component build() {
-    final closeAt = readableNext();
-    var text = 'FERMÉ';
-    if (openType == OpenType.open || openType == OpenType.duty) {
-      text = openType == OpenType.open ? 'OUVERT' : 'DE GARDE';
-      if (closeAt.isNotEmpty) {
-        text += ' - $closeAt';
-      }
-    }
-
-    return RowComponent(
+    return AnchorComponent(
       classes: [
-        'state-container-${isDesktop ? 'desktop' : 'mobile'}',
-        'v-center',
+        'no-text-decoration',
+        '${isMobile ? 'mobile' : 'desktop'}-go-to-schedule',
+        'green-background',
       ],
-      children: [
-        DivComponent(
-          classes: [
-            'pharmacy-state',
-            if (openType == OpenType.open || openType == OpenType.duty)
-              'green-background'
-            else
-              'red-background'
-          ],
-        ),
-        SpanComponent(
-          text: openType == OpenType.open || openType == OpenType.duty
-              ? text
-              : 'FERMÉ',
-          classes: ['state-text'],
-        ),
-      ],
-    );
-  }
-
-  TimeSlot getCurrentTimeSlot(List<TimeSlot> timeSlots, Hour hour) =>
-      timeSlots.firstWhere(
-          (timeSlot) => timeSlot.isInSlot(hour.hour, hour.minute),
-          orElse: () => null);
-
-  String readableNext() {
-    final sb = StringBuffer();
-    final now = DateTime.now().toUtc().add(Duration(hours: 1));
-    if (openType == OpenType.open || openType == OpenType.duty) {
-      final day = pharmacy.weekDays[now.weekday - 1];
-
-      final currentTimeSlot = getCurrentTimeSlot(
-        openType == OpenType.open ? day.slots : pharmacy.dutyTimeSlot,
-        Hour(now.hour, now.minute),
-      );
-      if (currentTimeSlot == null) {
-        return '';
-      }
-      sb.write('Fermeture à ${currentTimeSlot.end.toString()}');
-    }
-    return sb.toString();
-  }
-}
-
-class Informations extends Component {
-  @override
-  Component build() {
-    return DivComponent(
-      classes: ['informations-content'],
+      href: './horaire/',
       children: [
         RowComponent(
-          classes: ['v-center', 'h-center', 'informations'],
+          classes: ['v-center', 'h-center'],
           children: [
             MaterialIconComponent(
-              iconName: 'info_outline',
-              classes: ['informations-icon-size'],
+              iconName: 'schedule',
+              classes: ['horaires-icon-size'],
             ),
             SpanComponent(
-              text: 'Informations',
-              classes: ['informations-style'],
+              text: 'Horaires',
+              classes: ['horaires-style'],
             ),
           ],
         ),

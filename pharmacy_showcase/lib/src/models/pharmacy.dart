@@ -1,11 +1,5 @@
 import 'package:pharmacy_showcase/src/models/address.dart';
 
-enum OpenType {
-  open,
-  duty,
-  close,
-}
-
 class Pharmacy {
   final String domainName;
   final String name;
@@ -99,6 +93,10 @@ class TimeSlot {
     return false;
   }
 
+  String readableTimeSlot() {
+    return 'de ${start.readableHour()} à ${end.readableHour()}';
+  }
+
   @override
   String toString() {
     final sb = StringBuffer('TimeSlot{')
@@ -114,6 +112,9 @@ class Hour {
   final int minute;
 
   Hour(this.hour, this.minute);
+
+  String readableHour() =>
+      '${hour.toString().padLeft(2, '0')}h${minute.toString().padLeft(2, '0')}';
 
   @override
   String toString() => '${hour}h$minute';

@@ -6,6 +6,10 @@ body {
     display: none;
 }
 
+.mobile-go-to-schedule {
+    display: none;
+}
+
 .center-top-bar-content {
     width: 90%;
     max-width: 1100px;
@@ -31,13 +35,26 @@ body {
     grid-template-rows: 115px 500px 20px auto 20px auto;
 }
 
-.informations-content {
+.page-title-content {
     grid-column-start: 2;
     grid-column-end: -2;
     grid-row-start: 1;
     grid-row-end: 2;
     align-self: end;
     padding-bottom: 24px;
+}
+
+.desktop-go-to-schedule {
+    padding: 10px 43px;
+    border-radius: 29px;
+}
+
+.horaires-icon-size {
+    font-size: 18px;
+}
+
+.horaires-style {
+    font-size: 18px;
 }
 
 .state-container-desktop {

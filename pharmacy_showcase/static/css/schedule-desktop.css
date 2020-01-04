@@ -1,0 +1,73 @@
+.center-top-bar-content {
+    width: 90%;
+    max-width: 1100px;
+    min-width: 400px;
+    margin: auto;
+}
+
+.pharmacy-name {
+    font-size: 36px;
+}
+
+.mobile-state-container {
+    display: none;
+}
+
+.content {
+    width: 88%;
+    max-width: 1000px;
+    min-width: 400px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 3% 46.5% auto 20px auto 46.5% 3%;
+    grid-template-rows: 115px 20px auto 20px auto 20px auto;
+}
+
+.state-container-desktop {
+    background-color: #F1F3F4;
+    border-radius: 29px;
+}
+
+.page-title-content {
+    grid-column-start: 2;
+    grid-column-end: -2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    align-self: end;
+    padding-bottom: 24px;
+}
+
+.schedule-content {
+    grid-column-start: 1;
+    grid-column-end: -1;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.duty-title {
+    grid-column-start: 2;
+    grid-column-end: -2;
+    grid-row-start: 5;
+    grid-row-end: 6;
+}
+
+.duty-schedule-content {
+    grid-column-start: 1;
+    grid-column-end: -1;
+    grid-row-start: 7;
+    grid-row-end: 8;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.day-name {
+    font-size: 36px;
+}
+
+.day-timeslot {
+    font-size: 18px;
+}
