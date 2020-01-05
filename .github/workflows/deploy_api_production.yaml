@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - api/**
-      - .github/workflows/deploy_accounts_service_production.yaml
+      - .github/workflows/deploy_api_production.yaml
     branches:
       - production
 
@@ -18,7 +18,7 @@ jobs:
         run: docker login rg.fr-par.scw.cloud/funcscwsantetisfmaxsfvo -u anyuser -p ${{secrets.SCALEWAY_TOKEN}}
       - name: Docker build
         run: docker build -f Dockerfile  -t productionapi:latest .
-        working-directory: ./services/accounts
+        working-directory: ./api
       - name: Docker tag
         run: docker tag productionapi:latest rg.fr-par.scw.cloud/funcscwsantetisfmaxsfvo/productionapi:latest
       - name: Docker push
