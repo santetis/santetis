@@ -10,7 +10,7 @@ enum OpenType {
 
 OpenType getOpenType(Pharmacy pharmacy) {
   final publicHolidays = [
-    DateTime.utc(2020, 01, 01),
+    DateTime.utc(2020, 1, 1),
     DateTime.utc(2020, 4, 13),
     DateTime.utc(2020, 5, 1),
     DateTime.utc(2020, 5, 8),
@@ -25,30 +25,31 @@ OpenType getOpenType(Pharmacy pharmacy) {
   final now = DateTime.now().toUtc().add(Duration(hours: 1));
   final today = DateTime.utc(now.year, now.month, now.day);
 
+  for (final publicHoliday in publicHolidays) {
+    if (today.isAtSameMomentAs(publicHoliday)) {
+      if (pharmacy.dutyTimeSlot
+          .map((timeSlot) => timeSlot.isInSlot(now.hour, now.minute))
+          .contains(true)) {
+        return OpenType.duty;
+      }
+      return OpenType.close;
+    }
+  }
+
   final weekday = now.weekday - 1;
-  final date = publicHolidays.firstWhere(
-    (publicHoliday) => publicHoliday.isAtSameMomentAs(today),
-    orElse: () => null,
-  );
-  if (date != null) {
-    final dutyDate = pharmacy.dutyDates?.firstWhere(
-        (dutydate) => dutydate.isAtSameMomentAs(date),
-        orElse: () => null);
-    if (dutyDate != null) {
-      for (final timeslot in pharmacy.dutyTimeSlot ?? []) {
-        if (timeslot.isInSlot(now.hour, now.minute)) {
-          return OpenType.duty;
-        }
+  final day = pharmacy.weekDays[weekday];
+  if (day?.isInDay(now) == true) {
+    return OpenType.open;
+  }
+  final dutyDate = pharmacy.dutyDates?.firstWhere(
+      (dutydate) => dutydate.isAtSameMomentAs(today),
+      orElse: () => null);
+  if (dutyDate != null) {
+    for (final timeslot in pharmacy.dutyTimeSlot ?? []) {
+      if (timeslot.isInSlot(now.hour, now.minute)) {
+        return OpenType.duty;
       }
     }
-    return OpenType.close;
-  }
-  if (weekday > pharmacy.weekDays.length - 1) {
-    return OpenType.close;
-  }
-  final day = pharmacy.weekDays[weekday];
-  if (day.isInDay(now)) {
-    return OpenType.open;
   }
   return OpenType.close;
 }

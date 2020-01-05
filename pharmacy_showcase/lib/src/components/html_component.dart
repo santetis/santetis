@@ -23,7 +23,7 @@ class HtmlComponent extends Component {
     }
     sb.write('>');
     if (children != null) {
-      sb.write(children.map((child) => child.render()).join());
+      sb.write(children.map((child) => child?.render()).join());
     }
     sb.write('</$tag>');
     return sb.toString();

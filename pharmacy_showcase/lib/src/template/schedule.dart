@@ -135,14 +135,17 @@ class Schedule extends Component {
       classes: ['schedule-content'],
       children: [
         for (var i = 0; i < pharmacy.weekDays.length; i++)
-          Day(
-            weekDay: pharmacy
-                .weekDays[((now.weekday - 1) + i) % pharmacy.weekDays.length],
-            isToday: ((now.weekday - 1) + i) % pharmacy.weekDays.length ==
-                now.weekday - 1,
-            isOpen: openType == OpenType.duty || openType == OpenType.open,
-            isOnDuty: openType == OpenType.duty,
-          ),
+          if (pharmacy.weekDays[
+                  ((now.weekday - 1) + i) % pharmacy.weekDays.length] !=
+              null)
+            Day(
+              weekDay: pharmacy
+                  .weekDays[((now.weekday - 1) + i) % pharmacy.weekDays.length],
+              isToday: ((now.weekday - 1) + i) % pharmacy.weekDays.length ==
+                  now.weekday - 1,
+              isOpen: openType == OpenType.duty || openType == OpenType.open,
+              isOnDuty: openType == OpenType.duty,
+            ),
       ],
     );
   }

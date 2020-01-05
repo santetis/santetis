@@ -38,6 +38,7 @@ final pharmacieDuParc31 = Pharmacy(
       'Samedi',
       closeDuringLaunchTimeSlots,
     ),
+    null,
   ],
   dutyDates: [
     DateTime.utc(2020, 1, 5),
