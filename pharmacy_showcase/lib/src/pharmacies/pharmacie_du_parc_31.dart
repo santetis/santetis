@@ -38,9 +38,16 @@ final pharmacieDuParc31 = Pharmacy(
       'Samedi',
       closeDuringLaunchTimeSlots,
     ),
+    null,
   ],
   dutyDates: [
-    DateTime.utc(2020, 01, 05),
+    DateTime.utc(2020, 1, 5),
+    DateTime.utc(2020, 3, 15),
+    DateTime.utc(2020, 5, 21),
+    DateTime.utc(2020, 5, 24),
+    DateTime.utc(2020, 8, 30),
+    DateTime.utc(2020, 10, 11),
+    DateTime.utc(2020, 12, 20),
   ],
   dutyTimeSlot: dutyCloseDurintLaunchTimeSlots,
   address: Address(
