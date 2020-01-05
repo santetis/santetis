@@ -123,7 +123,8 @@ class Schedule extends Component {
           Day(
             weekDay: pharmacy
                 .weekDays[((now.weekday - 1) + i) % pharmacy.weekDays.length],
-            isToday: i == 0,
+            isToday: ((now.weekday - 1) + i) % pharmacy.weekDays.length ==
+                now.weekday - 1,
             isOpen: openType == OpenType.duty || openType == OpenType.open,
             isOnDuty: openType == OpenType.duty,
           ),
@@ -190,7 +191,7 @@ class DutySchedule extends Component {
 
   @override
   Component build() {
-    final now = DateTime.now().toUtc();
+    final now = DateTime.now().toUtc().add(Duration(hours: 1));
     return DivComponent(
       classes: ['duty-schedule-content'],
       children: [
