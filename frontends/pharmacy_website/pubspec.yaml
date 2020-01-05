@@ -1,8 +1,4 @@
-<<<<<<< HEAD:pharmacy_showcase/pubspec.yaml
-name: pharmacy_showcase
-=======
 name: pharmacy_website
->>>>>>> master:frontends/pharmacy_website/pubspec.yaml
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
