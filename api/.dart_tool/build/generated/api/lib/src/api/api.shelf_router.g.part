@@ -1,9 +1,0 @@
-// **************************************************************************
-// ShelfRouterGenerator
-// **************************************************************************
-
-Router _$ApiRouter(Api service) {
-  final router = Router();
-  router.add('GET', r'/ping', service.ping);
-  return router;
-}
