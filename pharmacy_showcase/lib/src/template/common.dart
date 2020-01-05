@@ -140,10 +140,10 @@ class State extends Component {
     final sb = StringBuffer();
     final now = DateTime.now().toUtc().add(Duration(hours: 1));
     if (openType == OpenType.open || openType == OpenType.duty) {
-      final day = pharmacy.weekDays[now.weekday - 1];
-
       final currentTimeSlot = getCurrentTimeSlot(
-        openType == OpenType.open ? day.slots : pharmacy.dutyTimeSlot,
+        openType == OpenType.open
+            ? pharmacy.weekDays[now.weekday - 1]
+            : pharmacy.dutyTimeSlot,
         Hour(now.hour, now.minute),
       );
       if (currentTimeSlot == null) {
