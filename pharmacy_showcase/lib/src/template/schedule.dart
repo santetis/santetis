@@ -81,6 +81,15 @@ class Content extends Component {
 
   @override
   Component build() {
+    final now = DateTime.now().toUtc();
+    final nextDuty = pharmacy.dutyDates.firstWhere(
+      (date) =>
+          now.isBefore(date) ||
+          (now.day == date.day &&
+              now.month == date.month &&
+              now.year == date.year),
+      orElse: () => null,
+    );
     return DivComponent(
       classes: ['content'],
       children: [
@@ -92,16 +101,22 @@ class Content extends Component {
           ],
         ),
         Schedule(pharmacy: pharmacy, openType: openType),
-        DivComponent(
-          classes: ['duty-title'],
-          children: [
-            Title(
-              iconName: 'emoji_transportation',
-              text: 'Jour de garde',
-            ),
-          ],
-        ),
-        DutySchedule(pharmacy: pharmacy, openType: openType),
+        if (nextDuty != null) ...[
+          DivComponent(
+            classes: ['duty-title'],
+            children: [
+              Title(
+                iconName: 'emoji_transportation',
+                text: 'Jour de garde',
+              ),
+            ],
+          ),
+          DutySchedule(
+            dutyTimeSlot: pharmacy.dutyTimeSlot,
+            openType: openType,
+            nextDutyDate: nextDuty,
+          ),
+        ]
       ],
     );
   }
@@ -184,10 +199,14 @@ class Day extends Component {
 }
 
 class DutySchedule extends Component {
-  final Pharmacy pharmacy;
+  final DateTime nextDutyDate;
+  final List<TimeSlot> dutyTimeSlot;
   final OpenType openType;
 
-  DutySchedule({@required this.pharmacy, this.openType = OpenType.close});
+  DutySchedule(
+      {@required this.dutyTimeSlot,
+      @required this.nextDutyDate,
+      this.openType = OpenType.close});
 
   @override
   Component build() {
@@ -195,18 +214,17 @@ class DutySchedule extends Component {
     return DivComponent(
       classes: ['duty-schedule-content'],
       children: [
-        for (final date in pharmacy.dutyDates)
-          DutyDay(
-            name:
-                '${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year}',
-            isToday: now.day == date.day &&
-                now.month == date.month &&
-                now.year == date.year,
-            isOpen: pharmacy.dutyTimeSlot
-                .map((timeSlot) => timeSlot.isInSlot(now.hour, now.minute))
-                .contains(true),
-            timeSlots: pharmacy.dutyTimeSlot,
-          ),
+        DutyDay(
+          name:
+              '${nextDutyDate.day.toString().padLeft(2, '0')}/${nextDutyDate.month.toString().padLeft(2, '0')}/${nextDutyDate.year}',
+          isToday: now.day == nextDutyDate.day &&
+              now.month == nextDutyDate.month &&
+              now.year == nextDutyDate.year,
+          isOpen: dutyTimeSlot
+              .map((timeSlot) => timeSlot.isInSlot(now.hour, now.minute))
+              .contains(true),
+          timeSlots: dutyTimeSlot,
+        )
       ],
     );
   }

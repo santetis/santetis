@@ -11,7 +11,16 @@ enum OpenType {
 OpenType getOpenType(Pharmacy pharmacy) {
   final publicHolidays = [
     DateTime.utc(2020, 01, 01),
-    DateTime.utc(2020, 01, 05),
+    DateTime.utc(2020, 4, 13),
+    DateTime.utc(2020, 5, 1),
+    DateTime.utc(2020, 5, 8),
+    DateTime.utc(2020, 5, 21),
+    DateTime.utc(2020, 6, 1),
+    DateTime.utc(2020, 7, 14),
+    DateTime.utc(2020, 8, 15),
+    DateTime.utc(2020, 11, 1),
+    DateTime.utc(2020, 11, 11),
+    DateTime.utc(2020, 12, 25),
   ];
   final now = DateTime.now().toUtc().add(Duration(hours: 1));
   final today = DateTime.utc(now.year, now.month, now.day);
