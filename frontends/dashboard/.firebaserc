@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "santetis-5c1e4"
+  },
+  "targets": {
+    "santetis-5c1e4": {
+      "hosting": {
+        "staging-dashboard": [
+          "staging-dashboard-santetis"
+        ],
+        "production-dashboard": [
+          "production-dashboard-santetis"
+        ]
+      }
+    }
   }
 }

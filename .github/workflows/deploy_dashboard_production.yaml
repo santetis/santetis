@@ -4,9 +4,9 @@ on:
   push:
     paths:
       - frontends/dashboard/**
-      - .github/workflows/deploy_dashboard_staging.yaml
+      - .github/workflows/deploy_dashboard_production.yaml
     branches:
-      - master
+      - production
 
 jobs:
   build:
@@ -31,7 +31,7 @@ jobs:
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting:staging-dashboard
+          args: deploy --only hosting:production-dashboard
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           PROJECT_PATH: ./frontends/dashboard
