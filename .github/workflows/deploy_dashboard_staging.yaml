@@ -1,18 +1,19 @@
-name: Check and test dashboard
+name: Deploy staging dashboard
 
 on:
-  pull_request:
+  push:
     paths:
       - frontends/dashboard/**
-      - .github/workflows/check_and_test_dashboard.yaml
+      - .github/workflows/deploy_dashboard_staging.yaml
     branches:
       - master
 
 jobs:
-  check_and_test_dashboard:
-    name: Test
+  build:
     runs-on: ubuntu-latest
+
     steps:
+      - uses: actions/checkout@v2
       - uses: actions/checkout@v1
       - uses: actions/setup-java@v1
         with:
@@ -23,12 +24,13 @@ jobs:
       - name: "Get dependencies"
         run: flutter packages get
         working-directory: ./frontends/dashboard
-      - name: "Check format"
-        run: flutter format -n --set-exit-if-changed .
+      - name: "Flutter build"
+        run: flutter build web
         working-directory: ./frontends/dashboard
-      - name: "Flutter analyze"
-        run: flutter analyze
-        working-directory: ./frontends/dashboard
-      - name: "Flutter test"
-        run: flutter
-        working-directory: ./frontends/dashboard
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting:dashboard-santetis
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          PROJECT_PATH: ./frontends/dashboard
