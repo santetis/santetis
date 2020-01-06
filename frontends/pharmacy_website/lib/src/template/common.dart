@@ -152,7 +152,7 @@ class State extends Component {
     if (openType == OpenType.open || openType == OpenType.duty) {
       final currentTimeSlot = getCurrentTimeSlot(
         openType == OpenType.open
-            ? pharmacy.weekDays[now.weekday - 1]
+            ? pharmacy.weekDays[now.weekday - 1].slots
             : pharmacy.dutyTimeSlot,
         Hour(now.hour, now.minute),
       );
