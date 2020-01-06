@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": ".github"
+		},
+		{
+			"path": "frontends/pharmacy_website"
+		},
+		{
+			"path": "api"
+		}
+	],
+	"settings": {}
+}
