@@ -11,6 +11,9 @@
 		},
 		{
 			"path": "frontends/dashboard"
+		},
+		{
+			"path": "frontends/admin_dashboard"
 		}
 	],
 	"settings": {}

@@ -1,12 +1,12 @@
-name: Deploy production dashboard
+name: Deploy staging admin dashboard
 
 on:
   push:
     paths:
-      - frontends/dashboard/**
-      - .github/workflows/deploy_dashboard_production.yaml
+      - frontends/admin_dashboard/**
+      - .github/workflows/deploy_admin_dashboard_staging.yaml
     branches:
-      - production
+      - master
 
 jobs:
   build:
@@ -24,14 +24,14 @@ jobs:
         run: flutter config --enable-web
       - name: "Get dependencies"
         run: flutter packages get
-        working-directory: ./frontends/dashboard
+        working-directory: ./frontends/admin_dashboard
       - name: "Flutter build"
         run: flutter build web
-        working-directory: ./frontends/dashboard
+        working-directory: ./frontends/admin_dashboard
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting:production-dashboard
+          args: deploy --only hosting:staging-admin-dashboard
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          PROJECT_PATH: ./frontends/dashboard
+          PROJECT_PATH: ./frontends/admin_dashboard
