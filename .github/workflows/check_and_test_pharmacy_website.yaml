@@ -1,0 +1,27 @@
+name: Check and test pharmacy website
+
+on:
+  pull_request:
+    paths:
+      - frontends/pharmacy_website/**
+      - .github/workflows/check_and_test_pharmacy_website.yaml
+    branches:
+      - master
+
+jobs:
+  check_and_test_pharmacy_website:
+    runs-on: ubuntu-latest
+    container:
+      image: google/dart:latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: pub get
+        working-directory: ./frontends/pharmacy_website
+      - name: Dart analyze
+        run: dartanalyzer --options=analysis_options.yaml --fatal-hints --fatal-warnings .
+        working-directory: ./frontends/pharmacy_website
+      - name: Run tests
+        run: pub run test
+        working-directory: ./frontends/pharmacy_website

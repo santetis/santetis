@@ -1,20 +1,26 @@
 import 'package:meta/meta.dart';
 import 'package:pharmacy_website/src/components/components.dart';
+import 'package:pharmacy_website/src/factories/now.dart';
 import 'package:pharmacy_website/src/models/pharmacy.dart';
 import 'package:pharmacy_website/src/template/common.dart';
 
 class ScheduleHtml extends Component {
   final Pharmacy pharmacy;
   final OpenType openType;
+  final NowFactory nowFactory;
 
-  ScheduleHtml({@required this.pharmacy, this.openType = OpenType.close});
+  ScheduleHtml({
+    @required this.pharmacy,
+    this.openType = OpenType.close,
+    this.nowFactory = defaultNowFactory,
+  });
 
   @override
   String render() {
     return '''<!DOCTYPE html>
 <html>
 ${Head(pharmacy: pharmacy).render()}
-${Body(pharmacy: pharmacy, openType: openType).render()}
+${Body(pharmacy: pharmacy, openType: openType, nowFactory: nowFactory).render()}
 </html>''';
   }
 }
@@ -58,15 +64,29 @@ class Head extends Component {
 class Body extends Component {
   final Pharmacy pharmacy;
   final OpenType openType;
+  final NowFactory nowFactory;
 
-  Body({@required this.pharmacy, this.openType = OpenType.close});
+  Body({
+    @required this.pharmacy,
+    this.openType = OpenType.close,
+    @required this.nowFactory,
+  });
 
   @override
   Component build() {
     return BodyComponent(
       children: [
-        TopBar(pharmacy: pharmacy, openType: openType, backHref: '../'),
-        Content(pharmacy: pharmacy, openType: openType),
+        TopBar(
+          pharmacy: pharmacy,
+          openType: openType,
+          backHref: '../',
+          nowFactory: nowFactory,
+        ),
+        Content(
+          pharmacy: pharmacy,
+          openType: openType,
+          nowFactory: nowFactory,
+        ),
       ],
     );
   }
@@ -75,12 +95,17 @@ class Body extends Component {
 class Content extends Component {
   final Pharmacy pharmacy;
   final OpenType openType;
+  final NowFactory nowFactory;
 
-  Content({@required this.pharmacy, this.openType = OpenType.close});
+  Content({
+    @required this.pharmacy,
+    @required this.nowFactory,
+    this.openType = OpenType.close,
+  });
 
   @override
   Component build() {
-    final now = DateTime.now().toUtc();
+    final now = nowFactory();
     final nextDuty = pharmacy.dutyDates.firstWhere(
       (date) =>
           now.isBefore(date) ||
@@ -96,10 +121,18 @@ class Content extends Component {
         DivComponent(
           classes: ['mobile-state-container'],
           children: [
-            MobileState(pharmacy: pharmacy, openType: openType),
+            MobileState(
+              pharmacy: pharmacy,
+              openType: openType,
+              nowFactory: nowFactory,
+            ),
           ],
         ),
-        Schedule(pharmacy: pharmacy, openType: openType),
+        Schedule(
+          pharmacy: pharmacy,
+          openType: openType,
+          nowFactory: nowFactory,
+        ),
         if (nextDuty != null) ...[
           DivComponent(
             classes: ['duty-title'],
@@ -124,12 +157,17 @@ class Content extends Component {
 class Schedule extends Component {
   final Pharmacy pharmacy;
   final OpenType openType;
+  final NowFactory nowFactory;
 
-  Schedule({@required this.pharmacy, this.openType = OpenType.close});
+  Schedule({
+    @required this.pharmacy,
+    @required this.nowFactory,
+    this.openType = OpenType.close,
+  });
 
   @override
   Component build() {
-    final now = DateTime.now();
+    final now = nowFactory();
     return DivComponent(
       classes: ['schedule-content'],
       children: [

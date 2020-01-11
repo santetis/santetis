@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 import 'package:pharmacy_website/src/components/components.dart';
+import 'package:pharmacy_website/src/factories/now.dart';
 import 'package:pharmacy_website/src/models/address.dart';
 import 'package:pharmacy_website/src/models/pharmacy.dart';
 import 'package:pharmacy_website/src/template/common.dart';
@@ -7,15 +8,20 @@ import 'package:pharmacy_website/src/template/common.dart';
 class PharmacyHtml extends Component {
   final Pharmacy pharmacy;
   final OpenType openType;
+  final NowFactory nowFactory;
 
-  PharmacyHtml({@required this.pharmacy, this.openType = OpenType.close});
+  PharmacyHtml({
+    @required this.pharmacy,
+    this.openType = OpenType.close,
+    @required this.nowFactory,
+  });
 
   @override
   String render() {
     return '''<!DOCTYPE html>
 <html>
 ${Head(pharmacy: pharmacy).render()}
-${Body(pharmacy: pharmacy, openType: openType).render()}
+${Body(pharmacy: pharmacy, openType: openType, nowFactory: nowFactory).render()}
 <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeUORSJnNLi-dEtxJyy8S7ZwFE0cnFdu0&callback=initMap"></script>
 <script>
   function initMap() {
@@ -77,15 +83,28 @@ class Head extends Component {
 class Body extends Component {
   final Pharmacy pharmacy;
   final OpenType openType;
+  final NowFactory nowFactory;
 
-  Body({@required this.pharmacy, this.openType = OpenType.close});
+  Body({
+    @required this.pharmacy,
+    @required this.nowFactory,
+    this.openType = OpenType.close,
+  });
 
   @override
   Component build() {
     return BodyComponent(
       children: [
-        TopBar(pharmacy: pharmacy, openType: openType),
-        Content(pharmacy: pharmacy, openType: openType),
+        TopBar(
+          pharmacy: pharmacy,
+          openType: openType,
+          nowFactory: nowFactory,
+        ),
+        Content(
+          pharmacy: pharmacy,
+          openType: openType,
+          nowFactory: nowFactory,
+        ),
       ],
     );
   }
@@ -94,8 +113,13 @@ class Body extends Component {
 class Content extends Component {
   final Pharmacy pharmacy;
   final OpenType openType;
+  final NowFactory nowFactory;
 
-  Content({@required this.pharmacy, this.openType = OpenType.close});
+  Content({
+    @required this.pharmacy,
+    @required this.nowFactory,
+    this.openType = OpenType.close,
+  });
 
   @override
   Component build() {
@@ -120,7 +144,11 @@ class Content extends Component {
         ColumnComponent(
           classes: ['mobile-state-container'],
           children: [
-            MobileState(pharmacy: pharmacy, openType: openType),
+            MobileState(
+              pharmacy: pharmacy,
+              openType: openType,
+              nowFactory: nowFactory,
+            ),
             GoToSchedule(isMobile: true),
           ],
         ),

@@ -177,7 +177,7 @@ packages:
     source: hosted
     version: "0.2.0"
   html:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: html
       url: "https://pub.dartlang.org"

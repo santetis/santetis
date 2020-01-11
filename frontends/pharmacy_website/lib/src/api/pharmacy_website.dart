@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:pharmacy_website/src/factories/now.dart';
 import 'package:pharmacy_website/src/template/schedule.dart';
 import 'package:pharmacy_website/src/template/pharmacy.dart';
 import 'package:pharmacy_website/src/template/common.dart';
@@ -10,6 +11,10 @@ import 'package:shelf_router/shelf_router.dart';
 part 'pharmacy_website.g.dart';
 
 class PharmacyWebsite {
+  final NowFactory nowFactory;
+
+  PharmacyWebsite({this.nowFactory = defaultNowFactory});
+
   @Route.get('/ping')
   Response ping(Request request) {
     return Response.ok('pong');
@@ -17,7 +22,7 @@ class PharmacyWebsite {
 
   @Route.get('/time')
   Response time(Request request) {
-    final now = DateTime.now();
+    final now = nowFactory();
     return Response.ok(
         '${now} timezone infos ${now.timeZoneName}, ${now.timeZoneOffset} utc ${now.toUtc()}');
   }
@@ -25,9 +30,12 @@ class PharmacyWebsite {
   @Route.get('/pharmacy/<pharmacyId>/')
   Future<Response> pharmacy(Request request, String pharmacyId) async {
     if (pharmacyId == 'pharmacieduparc31') {
-      final openType = getOpenType(pharmacieDuParc31);
-      final home =
-          PharmacyHtml(pharmacy: pharmacieDuParc31, openType: openType);
+      final openType = getOpenType(pharmacieDuParc31, nowFactory());
+      final home = PharmacyHtml(
+        pharmacy: pharmacieDuParc31,
+        openType: openType,
+        nowFactory: nowFactory,
+      );
       return Response.ok(
         home.render(),
         headers: {
@@ -41,9 +49,12 @@ class PharmacyWebsite {
   @Route.get('/pharmacy/<pharmacyId>/horaire/')
   Future<Response> schedule(Request request, String pharmacyId) async {
     if (pharmacyId == 'pharmacieduparc31') {
-      final openType = getOpenType(pharmacieDuParc31);
-      final schedule =
-          ScheduleHtml(pharmacy: pharmacieDuParc31, openType: openType);
+      final openType = getOpenType(pharmacieDuParc31, nowFactory());
+      final schedule = ScheduleHtml(
+        pharmacy: pharmacieDuParc31,
+        openType: openType,
+        nowFactory: nowFactory,
+      );
       return Response.ok(
         schedule.render(),
         headers: {

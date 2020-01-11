@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 import 'package:pharmacy_website/src/components/components.dart';
+import 'package:pharmacy_website/src/factories/now.dart';
 import 'package:pharmacy_website/src/models/pharmacy.dart';
 
 enum OpenType {
@@ -8,7 +9,7 @@ enum OpenType {
   close,
 }
 
-OpenType getOpenType(Pharmacy pharmacy) {
+OpenType getOpenType(Pharmacy pharmacy, DateTime now) {
   final publicHolidays = [
     DateTime.utc(2020, 1, 1),
     DateTime.utc(2020, 4, 13),
@@ -22,7 +23,6 @@ OpenType getOpenType(Pharmacy pharmacy) {
     DateTime.utc(2020, 11, 11),
     DateTime.utc(2020, 12, 25),
   ];
-  final now = DateTime.now().toUtc().add(Duration(hours: 1));
   final today = DateTime.utc(now.year, now.month, now.day);
 
   for (final publicHoliday in publicHolidays) {
@@ -37,9 +37,11 @@ OpenType getOpenType(Pharmacy pharmacy) {
   }
 
   final weekday = now.weekday - 1;
-  final day = pharmacy.weekDays[weekday];
-  if (day?.isInDay(now) == true) {
-    return OpenType.open;
+  if (weekday < pharmacy.weekDays.length) {
+    final day = pharmacy.weekDays[weekday];
+    if (day?.isInDay(now) == true) {
+      return OpenType.open;
+    }
   }
   final dutyDate = pharmacy.dutyDates?.firstWhere(
       (dutydate) => dutydate.isAtSameMomentAs(today),
@@ -58,8 +60,14 @@ class TopBar extends Component {
   final Pharmacy pharmacy;
   final OpenType openType;
   final String backHref;
+  final NowFactory nowFactory;
 
-  TopBar({@required this.pharmacy, this.openType, this.backHref});
+  TopBar({
+    @required this.pharmacy,
+    @required this.nowFactory,
+    this.openType,
+    this.backHref,
+  });
 
   @override
   Component build() {
@@ -86,7 +94,11 @@ class TopBar extends Component {
           classes: ['center-top-bar-content'],
           children: [
             pharmacyName,
-            State(pharmacy: pharmacy, openType: openType),
+            State(
+              pharmacy: pharmacy,
+              openType: openType,
+              nowFactory: nowFactory,
+            ),
           ],
         ),
       ],
@@ -98,9 +110,11 @@ class State extends Component {
   final Pharmacy pharmacy;
   final OpenType openType;
   final bool isDesktop;
+  final NowFactory nowFactory;
 
   State({
     @required this.pharmacy,
+    @required this.nowFactory,
     this.openType = OpenType.close,
     this.isDesktop = true,
   });
@@ -148,7 +162,7 @@ class State extends Component {
 
   String readableNext() {
     final sb = StringBuffer();
-    final now = DateTime.now().toUtc().add(Duration(hours: 1));
+    final now = nowFactory();
     if (openType == OpenType.open || openType == OpenType.duty) {
       final currentTimeSlot = getCurrentTimeSlot(
         openType == OpenType.open
@@ -225,12 +239,22 @@ class PageTitle extends Component {
 
 class MobileState extends Component {
   final Pharmacy pharmacy;
+  final NowFactory nowFactory;
   final OpenType openType;
 
-  MobileState({@required this.pharmacy, this.openType = OpenType.close});
+  MobileState({
+    @required this.pharmacy,
+    @required this.nowFactory,
+    this.openType = OpenType.close,
+  });
 
   @override
   Component build() {
-    return State(pharmacy: pharmacy, isDesktop: false, openType: openType);
+    return State(
+      pharmacy: pharmacy,
+      isDesktop: false,
+      openType: openType,
+      nowFactory: nowFactory,
+    );
   }
 }
