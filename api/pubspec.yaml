@@ -8,8 +8,17 @@ dependencies:
   shelf: ^0.7.5
   shelf_router: ^0.7.1
   meta: ^1.1.8
+  postgres: ^2.1.0
+  conn_pool: ^2.1.9
+  mockito: ^4.1.1
+  json_annotation: ^3.0.1
+  crypto: ^2.1.4
+  network_entities:
+    path: ../common/network_entities/
 
 dev_dependencies:
   test: ^1.6.0
   build_runner: ^1.3.1
   shelf_router_generator: ^0.7.2+2
+  json_serializable: ^3.2.5
+  dio: ^3.0.8

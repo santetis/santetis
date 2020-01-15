@@ -36,6 +36,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
+  buffer:
+    dependency: transitive
+    description:
+      name: buffer
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.6"
   build:
     dependency: transitive
     description:
@@ -120,6 +127,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.14.12"
+  conn_pool:
+    dependency: "direct main"
+    description:
+      name: conn_pool
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.9"
   convert:
     dependency: transitive
     description:
@@ -135,7 +149,7 @@ packages:
     source: hosted
     version: "0.13.3+3"
   crypto:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: crypto
       url: "https://pub.dartlang.org"
@@ -155,6 +169,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.3"
+  dio:
+    dependency: "direct dev"
+    description:
+      name: dio
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.8"
   fixnum:
     dependency: transitive
     description:
@@ -226,12 +247,19 @@ packages:
     source: hosted
     version: "0.6.1+1"
   json_annotation:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: json_annotation
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
+  json_serializable:
+    dependency: "direct dev"
+    description:
+      name: json_serializable
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.2.5"
   logging:
     dependency: transitive
     description:
@@ -260,6 +288,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.9.6+3"
+  mockito:
+    dependency: "direct main"
+    description:
+      name: mockito
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.1.1"
   multi_server_socket:
     dependency: transitive
     description:
@@ -267,6 +302,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
+  network_entities:
+    dependency: "direct main"
+    description:
+      path: "../common/network_entities"
+      relative: true
+    source: path
+    version: "0.0.0"
   node_interop:
     dependency: transitive
     description:
@@ -323,6 +365,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.4.0"
+  postgres:
+    dependency: "direct main"
+    description:
+      name: postgres
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
   pub_semver:
     dependency: transitive
     description:

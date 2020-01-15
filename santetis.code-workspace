@@ -14,6 +14,9 @@
 		},
 		{
 			"path": "frontends/admin_dashboard"
+		},
+		{
+			"path": "common/network_entities"
 		}
 	],
 	"settings": {}
