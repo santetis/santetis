@@ -1,11 +1,11 @@
 ## Make a self-contained executable out of the application.
 FROM google/dart AS dart-runtime
 WORKDIR /app
-ADD pubspec.* /app/
-ADD ../common/network_entities /common/network_entities/
+ADD api/pubspec.* /app/
+ADD common/network_entities /common/network_entities/
 RUN pub get
-ADD bin /app/bin/
-ADD lib /app/lib/
+ADD api/bin /app/bin/
+ADD api/lib /app/lib/
 RUN dart2native /app/bin/main.dart -o /app/bin/server
 
 ## Build a bare minimum image for serving.

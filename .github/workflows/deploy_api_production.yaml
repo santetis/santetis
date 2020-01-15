@@ -17,8 +17,7 @@ jobs:
       - name: Docker login
         run: docker login rg.fr-par.scw.cloud/funcscwsantetisfmaxsfvo -u anyuser -p ${{secrets.SCALEWAY_TOKEN}}
       - name: Docker build
-        run: docker build -f Dockerfile  -t productionapi:latest .
-        working-directory: ./api
+        run: docker build -f api/Dockerfile  -t stagingapi:latest .
       - name: Docker tag
         run: docker tag productionapi:latest rg.fr-par.scw.cloud/funcscwsantetisfmaxsfvo/productionapi:latest
       - name: Docker push
