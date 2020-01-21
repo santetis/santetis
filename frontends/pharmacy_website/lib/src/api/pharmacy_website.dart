@@ -65,5 +65,11 @@ class PharmacyWebsite {
     return Response.notFound('');
   }
 
+  @Route.get('/robots.txt')
+  Future<Response> robots(Request request) async {
+    return Response.ok('''User-agent: *
+Allow: /''');
+  }
+
   Router get router => _$PharmacyWebsiteRouter(this);
 }

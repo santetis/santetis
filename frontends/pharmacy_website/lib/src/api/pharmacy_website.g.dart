@@ -12,5 +12,6 @@ Router _$PharmacyWebsiteRouter(PharmacyWebsite service) {
   router.add('GET', r'/time', service.time);
   router.add('GET', r'/pharmacy/<pharmacyId>/', service.pharmacy);
   router.add('GET', r'/pharmacy/<pharmacyId>/horaire/', service.schedule);
+  router.add('GET', r'/robots.txt', service.robots);
   return router;
 }

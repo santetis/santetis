@@ -19,10 +19,10 @@ class PharmacyHtml extends Component {
   @override
   String render() {
     return '''<!DOCTYPE html>
-<html>
+<html lang="fr">
 ${Head(pharmacy: pharmacy).render()}
 ${Body(pharmacy: pharmacy, openType: openType, nowFactory: nowFactory).render()}
-<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeUORSJnNLi-dEtxJyy8S7ZwFE0cnFdu0&callback=initMap"></script>
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeUORSJnNLi-dEtxJyy8S7ZwFE0cnFdu0&callback=initMap"></script>
 <script>
   function initMap() {
     var pharmacyPosition = {
@@ -70,12 +70,17 @@ class Head extends Component {
   
   <title>${pharmacy.name} à ${pharmacy.address.city}</title>
   
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+  <link rel="preconnect" href="https://maps.gstatic.com/">
+  <link rel="preconnect" href="fonts.gstatic.com"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://maps.googleapis.com/">
+  
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/pharmacy.css">
-  <link rel="stylesheet" media="(min-width: 740px)" href="/css/pharmacy-desktop.css">
-  <link rel="stylesheet" media="(max-width: 739px)" href="/css/pharmacy-mobile.css">
+  <link rel="stylesheet" media="(min-width: 740px)" href="/css/pharmacy-desktop.css" defer>
+  <link rel="stylesheet" media="(max-width: 739px)" href="/css/pharmacy-mobile.css" defer>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" rel="stylesheet" defer>
 </head>''';
   }
 }
