@@ -12,4 +12,13 @@ class SignInResponseData {
       _$SignInResponseDataFromJson(json);
 
   Map<String, dynamic> toJson() => _$SignInResponseDataToJson(this);
+
+  @override
+  String toString() {
+    final sb = StringBuffer('SignInResponseData')
+      ..writeln(' {')
+      ..writeln('\ttoken: $token')
+      ..writeln('}');
+    return sb.toString();
+  }
 }

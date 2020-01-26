@@ -10,5 +10,6 @@ Router _$UsersRouter(Users service) {
   final router = Router();
   router.add('POST', r'/', service.createUser);
   router.add('POST', r'/sign_in', service.signIn);
+  router.add('OPTIONS', r'/sign_in', service.signIn);
   return router;
 }

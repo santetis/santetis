@@ -1,4 +1,5 @@
 import 'package:api/src/api/users/users.dart';
+import 'package:api/src/middlewares/cors.dart';
 import 'package:api/src/rpcs/tokens/save_token.dart';
 import 'package:api/src/rpcs/users/create_user.dart';
 import 'package:api/src/rpcs/users/get_user_by_email.dart';
@@ -35,5 +36,7 @@ class Api {
         saveTokenRpc: saveTokenRpc,
       ).router;
 
-  Handler get handler => _$ApiRouter(this).handler;
+  Handler get handler => Pipeline()
+      .addMiddleware(createCorsHeadersMiddleware())
+      .addHandler(_$ApiRouter(this).handler);
 }

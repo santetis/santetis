@@ -17,6 +17,9 @@
 		},
 		{
 			"path": "common/network_entities"
+		},
+		{
+			"path": "packages/san_router"
 		}
 	],
 	"settings": {}

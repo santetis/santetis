@@ -9,7 +9,7 @@ part of 'sign_in_request.dart';
 SignInRequestData _$SignInRequestDataFromJson(Map<String, dynamic> json) {
   return SignInRequestData(
     json['email'] as String,
-    encodePassword(json['password'] as String),
+    json['password'] as String,
   );
 }
 

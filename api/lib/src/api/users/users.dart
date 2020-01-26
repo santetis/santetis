@@ -7,6 +7,7 @@ import 'package:api/src/rpcs/tokens/save_token.dart';
 import 'package:api/src/rpcs/users/create_user.dart';
 import 'package:api/src/rpcs/users/get_user_by_email.dart';
 import 'package:api/src/rpcs/users/get_user_with_email_and_password.dart';
+import 'package:crypto/crypto.dart';
 import 'package:meta/meta.dart';
 import 'package:network_entities/network_entities.dart';
 import 'package:shelf/shelf.dart';
@@ -52,7 +53,9 @@ class Users {
   Future<Response> signIn(Request request) async {
     final body = json.decode(await request.readAsString());
     final data = SignInRequestData.fromJson(body);
-    final user = await getUserWithEmailAndPasswordRpc.request(data);
+    final encryptedData = SignInRequestData(
+        data.email, sha512.convert(data.password.codeUnits).toString());
+    final user = await getUserWithEmailAndPasswordRpc.request(encryptedData);
     if (user == null) {
       return Response.notFound('');
     }
@@ -61,7 +64,9 @@ class Users {
     final tokenBytes = List.generate(tokenLength, (_) => random.nextInt(255));
     final token = DatabaseToken(user?.id, base64.encode(tokenBytes));
     await saveTokenRpc.request(token);
-    return Response.ok(json.encode(SignInResponseData(token.token)));
+    return Response.ok(
+      json.encode(SignInResponseData(token.token)),
+    );
   }
 
   Router get router => _$UsersRouter(this);

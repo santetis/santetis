@@ -26,7 +26,7 @@ jobs:
         run: flutter packages get
         working-directory: ./frontends/admin_dashboard
       - name: "Flutter build"
-        run: flutter build web
+        run: flutter build web -t lib/production_main.dart
         working-directory: ./frontends/admin_dashboard
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
