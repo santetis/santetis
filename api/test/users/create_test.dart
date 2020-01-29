@@ -39,6 +39,8 @@ void main() {
       createUserRpc: createUser,
       getUserWithEmailAndPasswordRpc: null,
       saveTokenRpc: null,
+      getTokenRpc: null,
+      getUserWithTokenRpc: null,
     );
     final response = await users.createUser(createUserRequestFactory());
     expect(response.statusCode, HttpStatus.notImplemented);

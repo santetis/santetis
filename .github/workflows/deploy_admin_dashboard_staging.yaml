@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - frontends/admin_dashboard/**
+      - packages/san_router/**
+      - common/network_entities/**
       - .github/workflows/deploy_admin_dashboard_staging.yaml
     branches:
       - master

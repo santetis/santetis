@@ -8,6 +8,8 @@ void main() {
       getUserWithEmailAndPasswordRpc: null,
       getUserByEmailRpc: null,
       saveTokenRpc: null,
+      getTokenRpc: null,
+      getUserWithTokenRpc: null,
     );
     final response = accountsService.ping(null);
     expect(response.statusCode, 200);

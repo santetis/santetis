@@ -13,7 +13,6 @@ class GetUserByEmailRpc extends Rpc<String, DatabaseUser> {
   @override
   FutureOr<DatabaseUser> request(String input) async {
     await _getUserByEmailFromDatabase.request(input);
-    // print(data);
     return null;
   }
 }

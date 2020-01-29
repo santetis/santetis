@@ -38,8 +38,7 @@ void main() {
                 'users': {
                   'id': 1,
                   'email': 'kevin@santetis.fr',
-                  'password':
-                      '5cdbb19831253c54e162539d6724c3f7185e242e845874e3ea7737b5f95df57764b9b3da0c94823c6250b2d2e6650ae0f158580f14737d5fe41f8b6ba62a9b19',
+                  'password': 'aaa',
                   'account_type': 'admin',
                   'created_on': '2020-01-15T13:56:40.651553Z',
                   'last_login': null,
@@ -56,6 +55,8 @@ void main() {
       createUserRpc: null,
       getUserWithEmailAndPasswordRpc: getUserWithEmailAndPassword,
       saveTokenRpc: saveTokenRpc,
+      getTokenRpc: null,
+      getUserWithTokenRpc: null,
     );
     final response =
         await users.signIn(signInUserRequestFactory(email, password));
@@ -80,6 +81,8 @@ void main() {
       createUserRpc: null,
       getUserWithEmailAndPasswordRpc: getUserWithEmailAndPassword,
       saveTokenRpc: saveTokenRpc,
+      getTokenRpc: null,
+      getUserWithTokenRpc: null,
     );
     final response = await users
         .signIn(signInUserRequestFactory('kevin@santetis.fr', 'tttt'));

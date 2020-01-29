@@ -1,5 +1,6 @@
 import 'package:api/src/rpcs/users/create_user.dart';
 import 'package:api/src/rpcs/users/get_user_by_email.dart';
+import 'package:api/src/rpcs/users/get_user_from_token.dart';
 import 'package:api/src/rpcs/users/get_user_with_email_and_password.dart';
 import 'package:mockito/mockito.dart';
 
@@ -10,3 +11,6 @@ class CreateUserInDatabaseMock extends Mock implements CreateUserInDatabase {}
 
 class GetUserWithEmailAndPasswordFromDatabaseMock extends Mock
     implements GetUserWithEmailAndPasswordFromDatabase {}
+
+class GetUserWithTokenFromDatabaseMock extends Mock
+    implements GetUserWithTokenFromDatabase {}

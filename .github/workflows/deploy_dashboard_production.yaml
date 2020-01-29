@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - frontends/dashboard/**
+      - packages/san_router/**
+      - common/network_entities/**
       - .github/workflows/deploy_dashboard_production.yaml
     branches:
       - production

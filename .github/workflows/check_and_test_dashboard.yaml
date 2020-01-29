@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - frontends/dashboard/**
+      - common/network_entities/**
       - .github/workflows/check_and_test_dashboard.yaml
     branches:
       - master

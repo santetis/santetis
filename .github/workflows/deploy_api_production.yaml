@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - api/**
+      - common/network_entities/**
       - .github/workflows/deploy_api_production.yaml
     branches:
       - production

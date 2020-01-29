@@ -1,13 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:network_entities/network_entities.dart';
 
 part 'user.g.dart';
-
-enum AccountType {
-  admin,
-  pharmacist,
-  doctor,
-  nurse,
-}
 
 @JsonSerializable()
 class DatabaseUser {

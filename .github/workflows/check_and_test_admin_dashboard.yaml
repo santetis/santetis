@@ -5,6 +5,7 @@ on:
     paths:
       - frontends/admin_dashboard/**
       - packages/san_router/**
+      - common/network_entities/**
       - .github/workflows/check_and_test_admin_dashboard.yaml
     branches:
       - master

@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:api/api.dart';
 import 'package:api/src/postgres_manager.dart';
+import 'package:api/src/rpcs/tokens/get_token.dart';
 import 'package:api/src/rpcs/tokens/save_token.dart';
 import 'package:api/src/rpcs/users/create_user.dart';
 import 'package:api/src/rpcs/users/get_user_by_email.dart';
+import 'package:api/src/rpcs/users/get_user_from_token.dart';
 import 'package:api/src/rpcs/users/get_user_with_email_and_password.dart';
 import 'package:conn_pool/conn_pool.dart';
 import 'package:postgres/postgres.dart';
@@ -41,12 +43,18 @@ void main() async {
       GetUserWithEmailAndPasswordRpc(getUserWithEmailAndPasswordFromDatabase);
   final saveTokenInDatabase = SaveTokenInDatabase(pool);
   final saveTokenRpc = SaveTokenRpc(saveTokenInDatabase);
+  final getTokenFromDatabase = GetTokenFromDatabase(pool);
+  final getTokenRpc = GetTokenRpc(getTokenFromDatabase);
+  final getUserWithTokenFromDatabase = GetUserWithTokenFromDatabase(pool);
+  final getUserWithTokenRpc = GetUserWithTokenRpc(getUserWithTokenFromDatabase);
 
   final api = Api(
     getUserByEmailRpc: getUserByEmailRpc,
     createUserRpc: createUserRpc,
     getUserWithEmailAndPasswordRpc: getUserWithEmailAndPasswordRpc,
     saveTokenRpc: saveTokenRpc,
+    getTokenRpc: getTokenRpc,
+    getUserWithTokenRpc: getUserWithTokenRpc,
   );
 
   await io.serve(api.handler, InternetAddress.anyIPv4, port);

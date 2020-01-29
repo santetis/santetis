@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - api/**
+      - common/network_entities/**
       - .github/workflows/check_and_test_api.yaml
     branches:
       - master
