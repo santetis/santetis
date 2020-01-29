@@ -11,7 +11,7 @@ class CreateUserRpc extends Rpc<DatabaseUser, void> {
   CreateUserRpc(this._createUserInDatabase);
 
   @override
-  FutureOr<void> request(DatabaseUser input) =>
+  Future<void> request(DatabaseUser input) =>
       _createUserInDatabase.request(input);
 }
 
@@ -21,10 +21,10 @@ class CreateUserInDatabase extends Rpc<DatabaseUser, void> {
   CreateUserInDatabase(this._pool);
 
   @override
-  FutureOr<void> request(DatabaseUser input) async {
+  Future<void> request(DatabaseUser input) async {
     final conn = await _pool.get();
     await conn.connection.mappedResultsQuery(
-      'INSERT INTO users (email, password, accountType) VALUES (@email, @password, @accountType)',
+      'INSERT INTO users (email, password, account_type, created_on) VALUES (@email, @password, @account_type, @created_on)',
       substitutionValues: input.toJson(),
     );
     await conn.release();

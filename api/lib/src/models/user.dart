@@ -16,8 +16,8 @@ class DatabaseUser {
   @JsonKey(name: 'last_login')
   final DateTime lastLogin;
 
-  DatabaseUser(this.email, this.password, this.accountType, this.createdOn,
-      {this.lastLogin, this.id});
+  DatabaseUser(this.email, this.accountType, this.createdOn,
+      {this.password, this.lastLogin, this.id});
 
   factory DatabaseUser.fromJson(Map<String, dynamic> json) =>
       _$DatabaseUserFromJson(json);

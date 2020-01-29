@@ -9,11 +9,11 @@ part of 'user.dart';
 DatabaseUser _$DatabaseUserFromJson(Map<String, dynamic> json) {
   return DatabaseUser(
     json['email'] as String,
-    json['password'] as String,
     _$enumDecodeNullable(_$AccountTypeEnumMap, json['account_type']),
     json['created_on'] == null
         ? null
         : DateTime.parse(json['created_on'] as String),
+    password: json['password'] as String,
     lastLogin: json['last_login'] == null
         ? null
         : DateTime.parse(json['last_login'] as String),
